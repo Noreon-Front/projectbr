@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 const Cart = () => {
-  const { cart, getCart, changeProductCount } = useProducts();
+  const { cart, getCart, changeProductCount, deleteProductFromCart } = useProducts();
 
   useEffect(() => {
     getCart();
@@ -61,27 +61,17 @@ const Cart = () => {
                         {item.product.title}
                       </TableCell>
                       <TableCell align="center">
-                        <img
-                          src={item.product.image}
-                          alt=""
-                          style={{ width: "100px" }}
-                        />
+                        <img src={item.product.image} alt="" style={{ width: "100px" }} />
                       </TableCell>
 
                       <TableCell align="center">{item.product.price}</TableCell>
                       <TableCell align="center">
-                        <input
-                          type="number"
-                          value={item.count}
-                          onChange={(e) =>
-                            handleCountChange(e.target, item.product.id)
-                          }
-                        />
+                        <input type="number" value={item.count} onChange={(e) => handleCountChange(e.target, item.product.id)} />
                       </TableCell>
 
                       <TableCell align="center">{item.subPrice}</TableCell>
                       <TableCell align="center">
-                        <IconButton align="center">
+                        <IconButton align="center" onClick={() => deleteProductFromCart(item.product)}>
                           <DeleteIcon />
                         </IconButton>
                       </TableCell>
@@ -97,9 +87,7 @@ const Cart = () => {
                     padding: "10px",
                   }}
                 >
-                  <h3 align="center">
-                    Total : {calcTotalPrice(cart.products)}
-                  </h3>
+                  <h3 align="center">Total : {calcTotalPrice(cart.products)}</h3>
                   <MyLink to="/payment">
                     <Button variant="contained" color="secondary">
                       Оплатить

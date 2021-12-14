@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     maxWidth: "100%",
   },
   media: {
-    height: 200,
+    height: 300,
     backgroundSize: "contain",
   },
   actions: {
@@ -41,28 +41,16 @@ const ProductCard = ({ product, cart }) => {
     <Card className={classes.root}>
       <MyLink to={`/product/${product.id}`}>
         <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={product.image}
-            title="Contemplative Reptile"
-          />
+          <CardMedia className={classes.media} image={product.image} title="Contemplative Reptile" />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {product.title}
             </Typography>
-            <Typography
-              variant="body2"
-              gutterBottom
-              color="textSecondary"
-              component="p"
-            >
+            <Typography variant="body2" gutterBottom color="textSecondary" component="p">
               {product.description}
             </Typography>
             <Typography variant="subtitle1" color="textPrimary" component="p">
               Цена: {product.price} сом
-            </Typography>
-            <Typography variant="subtitle1" color="textPrimary" component="p">
-              Память: {product.category} гб
             </Typography>
             <Typography variant="subtitle1" color="textPrimary" component="p">
               В наличии: {product.countInStock} шт
@@ -71,12 +59,12 @@ const ProductCard = ({ product, cart }) => {
         </CardActionArea>
       </MyLink>
       <CardActions className={classes.actions}>
-        <IconButton color={isItemInCart() ? "secondary" : "primary"}>
+        <IconButton color={isItemInCart() ? "secondary" : ""}>
           <ShoppingCartIcon />
         </IconButton>
         <Button
           onClick={() => addAndDeleteProductInCart(product)}
-          color="primary"
+          style={{ backgroundColor: "#ff8800" }}
           variant="contained"
           startIcon={<Shop />}
         >

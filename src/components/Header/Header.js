@@ -186,19 +186,11 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ backgroundColor: "#ff8800" }}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
           <MyLink to="/">
             <Typography className={classes.title} variant="h6" noWrap>
-              Akim Shop
+              Sneakersbek
             </Typography>
           </MyLink>
           <ClickAwayListener onClickAway={() => setSearchActive(false)}>
@@ -229,7 +221,7 @@ export default function Header() {
             <MyLink to="/add">
               <IconButton>
                 <Button variant="outlined" color="inherit">
-                  Add new phone
+                  Add new Sneaker
                 </Button>
               </IconButton>
             </MyLink>
@@ -257,27 +249,6 @@ export default function Header() {
                 </Badge>
               </IconButton>
             </MyLink>
-
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

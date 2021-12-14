@@ -15,17 +15,8 @@ import {
   GET_PRODUCT_SUCCESS,
   SET_SEARCH_RESULTS,
 } from "../utils/constants";
-import {
-  productError,
-  productLoading,
-  productSuccess,
-} from "./actions/productDetailsActions";
-import {
-  productsError,
-  productsLoading,
-  productsSuccess,
-  setSearchResults,
-} from "./actions/productsActions";
+import { productError, productLoading, productSuccess } from "./actions/productDetailsActions";
+import { productsError, productsLoading, productsSuccess, setSearchResults } from "./actions/productsActions";
 
 const productsContext = createContext();
 
@@ -40,9 +31,7 @@ const initialState = {
     error: null,
     product: null,
   },
-  cartData: JSON.parse(localStorage.getItem("cart"))
-    ? JSON.parse(localStorage.getItem("cart")).products.length
-    : 0,
+  cartData: JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).products.length : 0,
   cart: {},
   searchResults: [],
 };
@@ -136,6 +125,25 @@ const ProductsContext = ({ children }) => {
     }
   };
 
+  const deleteProductFromCart = (product) => {
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    const isItemInCart = checkItemInCart(cart.products, product.id);
+    if (isItemInCart) {
+      cart.products = cart.products.filter((item) => {
+        return item.product.id !== product.id;
+      });
+    }
+    cart.totalPrice = calcTotalPrice(cart.products);
+
+    console.log(cart, "cart");
+    localStorage.setItem("cart", JSON.stringify(cart));
+    getCart();
+    dispatch({
+      type: ADD_AND_DELETE_PRODUCT_IN_CART,
+      payload: cart.products.length,
+    });
+  };
+
   const fetchOneProduct = async (id) => {
     dispatch(productLoading());
     try {
@@ -169,9 +177,7 @@ const ProductsContext = ({ children }) => {
     // );
     const isItemInCart = checkItemInCart(cart.products, product.id);
     if (isItemInCart) {
-      cart.products = cart.products.filter(
-        (item) => item.product.id !== product.id
-      );
+      cart.products = cart.products.filter((item) => item.product.id !== product.id);
     } else {
       cart.products.push(newProduct);
     }
@@ -252,6 +258,14 @@ const ProductsContext = ({ children }) => {
     }
   };
 
+  const editItem = (item) => {
+    try {
+      return $api.patch(`/${item.id}`, item);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const deleteProduct = async (id) => {
     try {
       await $api.delete(`/${id}`);
@@ -278,13 +292,11 @@ const ProductsContext = ({ children }) => {
     fetchSearchProducts,
     addProduct,
     deleteProduct,
+    deleteProductFromCart,
+    editItem,
   };
 
-  return (
-    <productsContext.Provider value={values}>
-      {children}
-    </productsContext.Provider>
-  );
+  return <productsContext.Provider value={values}>{children}</productsContext.Provider>;
 };
 
 export default ProductsContext;

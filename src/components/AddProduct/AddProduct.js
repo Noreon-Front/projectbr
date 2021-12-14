@@ -12,8 +12,6 @@ const AddProduct = () => {
     image: "",
     price: "",
     description: "",
-    category: "",
-    author: "",
     phone: "",
     countInStock: "",
   });
@@ -28,16 +26,7 @@ const AddProduct = () => {
   };
 
   const addPhone = async () => {
-    if (
-      !form.title ||
-      !form.image ||
-      !form.price ||
-      !form.description ||
-      !form.category ||
-      !form.author ||
-      !form.phone ||
-      !form.countInStock
-    ) {
+    if (!form.title || !form.image || !form.price || !form.description || !form.phone || !form.countInStock) {
       alert("fill all blanks");
       return;
     }
@@ -47,18 +36,12 @@ const AddProduct = () => {
   //   console.log(form);
   return (
     <>
-      <h1>Add new smartphone</h1>
+      <h1>Add new Sneaker</h1>
       <Grid container className="main">
         <Grid item md={5}>
           <Paper elevation={5} className="paper">
             <form className="inp">
-              <input
-                type="text"
-                placeholder="Title"
-                name="title"
-                value={form.title}
-                onChange={handleChange}
-              />
+              <input type="text" placeholder="Title" name="title" value={form.title} onChange={handleChange} />
               <textarea
                 type="text"
                 placeholder="Description"
@@ -66,41 +49,9 @@ const AddProduct = () => {
                 value={form.description}
                 onChange={handleChange}
               />
-              <input
-                type="text"
-                placeholder="Image"
-                name="image"
-                onChange={handleChange}
-                value={form.image}
-              />
-              <input
-                type="text"
-                placeholder="Price"
-                name="price"
-                onChange={handleChange}
-                value={form.price}
-              />
-              <input
-                type="text"
-                placeholder="Category"
-                name="category"
-                onChange={handleChange}
-                value={form.category}
-              />
-              <input
-                type="text"
-                placeholder="Author"
-                name="author"
-                onChange={handleChange}
-                value={form.author}
-              />
-              <input
-                type="text"
-                placeholder="Phone"
-                name="phone"
-                onChange={handleChange}
-                value={form.phone}
-              />
+              <input type="text" placeholder="Image" name="image" onChange={handleChange} value={form.image} />
+              <input type="text" placeholder="Price" name="price" onChange={handleChange} value={form.price} />
+              <input type="text" placeholder="Phone" name="phone" onChange={handleChange} value={form.phone} />
               <input
                 type="text"
                 placeholder="Count in stock"
@@ -109,13 +60,8 @@ const AddProduct = () => {
                 value={form.countInStock}
               />
             </form>
-            <Button
-              onClick={addPhone}
-              variant="contained"
-              color="secondary"
-              className="btn-add"
-            >
-              Add a new product
+            <Button onClick={addPhone} variant="contained" color="secondary" className="btn-add">
+              Add a new Sneaker
             </Button>
           </Paper>
         </Grid>
